@@ -28,13 +28,22 @@ body {
 .card h2 {
     margin: 10px 0;
 }
+.signup-box{
+    margin-top: 20px;;
+}
 
 /* Login and Signup Pages */
 .login-container, .signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
+    margin-top:20px;
+}
+.full{
+    display: flex;
+    flex-direction: column;
+    gap:0;
 }
 
 .login-box, .signup-box {
@@ -45,20 +54,55 @@ body {
     text-align: center;
     width: 300px;
 }
+label{
+    text-align: start;
+    margin-bottom: 5px;
+}
 
 h1 {
-    margin-bottom: 20px;
+    /* margin-bottom: 5px; */
     color: #333;
+}
+.head{
+    text-align: center;
+}
+.para{
+    font-size: 15px;
+    margin-bottom:5px;
+    /* font-weight: 700; */
+}
+#drona{
+    color:#3D84A8;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .google-btn {
-    background-color: #3D84A8;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 15px;
+    text-align: center;
+    padding:5px 60px;
+    margin-bottom:15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #555;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    /* padding: 10px 20px; */
+    font-size: 15px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color:white;
+    color: black;
+    border: 2px solid #3D84A8;
+}
+
+.google-btn img {
+    margin-right: 10px;
+}
+
+.google-btn:hover {
+    background-color: #f5f5f5;
 }
 
 form {
@@ -71,6 +115,7 @@ input {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    border:2px solid #3D84A8
 }
 
 button {
@@ -80,4 +125,7 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    margin-top:5px;
 }
+
+ 

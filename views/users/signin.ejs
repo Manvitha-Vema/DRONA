@@ -7,13 +7,20 @@
     <title>Create Account</title>
 </head>
 <body>
-    <div class="signup-container">
-        <div class="signup-box">
-            <h1>Create Account</h1>
-            <button class="google-btn" onclick="window.location.href='/auth/google'">Sign in with Google</button>
+    <div class="head">
+        <h1 id="drona">DRONA</h1>
+            <h2>Create Account</h2>
+        </div>
+        <div class="signup-container">
+            <div class="signup-box">
+            <button class="google-btn" onclick="window.location.href='/auth/google'"><img src="/images/google.png" width="30px" height="30px" alt="google">SignUp with Google</button>
+            <!-- <h1>Create Account</h1> -->
             <form id="signup-form">
+                <label for="email">Email*</label>
                 <input type="email" id="email" placeholder="Enter your email" required>
+                <label for="password">Password*</label>
                 <input type="password" id="password" placeholder="Enter your password" required>
+                <label for="confirm-password">Re-Enter Password*</label>
                 <input type="password" id="confirm-password" placeholder="Re-enter your password" required>
                 <button type="submit">Create Account</button>
             </form>
@@ -22,7 +29,8 @@
     </div>
     <script>
         document.getElementById('signup-form').addEventListener('submit', async function (e) {
-    
+
+            e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;

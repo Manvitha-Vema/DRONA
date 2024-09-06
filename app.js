@@ -30,11 +30,15 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("views", path.join(__dirname, "views"));
 
+const Mongo =
+  "mongodb+srv://manvithamanni13:hBkIw9pR7jmpfv9l@cluster0.zsw3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 app.use(
   session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
+    cookie: { secure: false },
   })
 );
 app.use(passport.initialize());
@@ -49,13 +53,17 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI, {});
+  await mongoose.connect(Mongo, {});
 }
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
+app.get("/select", (req, res) => {
   res.render("index.ejs");
+});
+
+app.get("/", (req, res) => {
+  res.render("hero.ejs");
 });
 
 app.get("/login", (req, res) => {
@@ -68,58 +76,63 @@ app.get("/signup", (req, res) => {
 app.get("/verify", (req, res) => {
   res.render("users/verify.ejs");
 });
+// app.get("/test-redirect", (req, res) => {
+//   res.redirect("/verify");
+// });
 
 app.post("/signup", async (req, res) => {
-  try {
-    const { email, password, role } = req.body;
+  // res.render("users/verify.ejs");
+  // try {
+  const { email, password, role } = req.body;
 
-    // Validate input fields
-    if (email == "" || password == "" || role == "") {
-      return res.status(400).json({ message: "Empty input field" });
-      // } else if (!/^[a-zA-Z]*$/.test(name)) {
-      //   return res.status(400).json({ message: "Invalid name entered" });
-    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      return res.status(400).json({ message: "Invalid email entered" });
-    } else if (password.length < 6) {
-      return res.status(400).json({ message: "Password is too short" });
-    }
-
-    const userModel = role === "mentor" ? Mentor : Mentee;
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const existingUser = await userModel.findOne({ email });
-    console.log(userModel);
-
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const newUser = new userModel({
-      email,
-      password: hashedPassword,
-      isVerified: false,
-    });
-    console.log(newUser.isVerified);
-    await newUser.save();
-    if (!newUser.isVerified) {
-      // Store necessary details in the session for 2FA verification
-      req.session.userid = newUser._id;
-      req.session.email = newUser.email;
-      req.session.role = userModel;
-
-      // return res.status(400).json({ message: "2FA verification pending" });
-    }
-    console.log("Session data set:", req.session);
-
-    // Send verification email
-    await sendVerificationEmail(newUser);
-
-    // Render the verification page if successful
-    return res.redirect("/verify");
-    // console.log("ushu");
-  } catch (error) {
-    console.log("Error during signup:", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+  // Validate input fields
+  if (email == "" || password == "" || role == "") {
+    return res.status(400).json({ message: "Empty input field" });
+    // } else if (!/^[a-zA-Z]*$/.test(name)) {
+    //   return res.status(400).json({ message: "Invalid name entered" });
+  } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    return res.status(400).json({ message: "Invalid email entered" });
+  } else if (password.length < 6) {
+    return res.status(400).json({ message: "Password is too short" });
   }
+
+  const userModel = role === "mentor" ? Mentor : Mentee;
+  const hashedPassword = await bcrypt.hash(password, 12);
+  const existingUser = await userModel.findOne({ email });
+  console.log(userModel);
+
+  if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  const newUser = new userModel({
+    email,
+    password: hashedPassword,
+    isVerified: false,
+  });
+  console.log(newUser.isVerified);
+  await newUser.save();
+  // Store necessary details in the session for 2FA verification
+  req.session.userid = newUser._id;
+  req.session.email = newUser.email;
+  req.session.role = role;
+
+  // return res.status(400).json({ message: "2FA verification pending" });
+
+  console.log("Session data set:", req.session);
+
+  // Send verification email
+  await sendVerificationEmail(newUser);
+
+  // Render the verification page if successful
+  console.log("Before redirect to /verify");
+  return res.redirect("/verify");
+  // return res.render("users/verify.ejs");
+  // console.log("ushu");
+  // } catch (error) {
+  //   console.log("Error during signup:", error.message);
+  //   return res.status(500).json({ message: "Internal server error" });
+  // }
 });
 
 // Login Route

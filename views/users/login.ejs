@@ -7,18 +7,29 @@
     <title>Login</title>
 </head>
 <body>
+    <div class="full">
+        <div class="head">
+        
+            <h1 id="drona">DRONA</h1>
+            <h2>Welcome back</h2>
+            <p ><pre class="para">Glad to see you again
+Login to your account below</pre></p>
+        </div>
     <div class="login-container">
         <div class="login-box">
-            <h1>Welcome Back</h1>
-            <button class="google-btn" onclick="window.location.href='/auth/google'">Continue with Google</button>
+            <!-- <h1>Welcome Back</h1> -->
             <form id="login-form">
-                <input type="email" id="email" placeholder="Enter your email" required>
+        <button class="google-btn" onclick="window.location.href='/auth/google'"><img src="/images/google.png" width="30px" height="30px" alt="google">Continue with Google</button>
+        <label for="email">Email*</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                <label for="password">Password*</label>
                 <input type="password" id="password" placeholder="Enter your password" required>
                 <button type="submit">Login</button>
             </form>
             <p>Don't have an account? <a href="/signup">Sign up</a></p>
         </div>
     </div>
+
     <script>
         document.getElementById('login-form').addEventListener('submit', async function (e) {
             e.preventDefault();

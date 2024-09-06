@@ -38,7 +38,7 @@
         }
 
         nav ul li {
-            margin: 0 30px;
+            margin: 0 20px;
         }
 
         nav ul li a {
@@ -46,16 +46,32 @@
             color: #3D84A8;
             font-weight: 600;
         }
-        .flex{
-            display:flex;
-            justify-content: space-between;
-        }
-        .img{
-            margin-right:40px;
-        }
-        .img img{
-            width:350px;
 
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .img {
+            flex: 1;
+            margin-right: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .img img {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .cta-btn {
@@ -71,49 +87,18 @@
         .cta-btn:hover {
             background-color: #3D84A8;
             color: #fff;
-        } p a{
-            color:#3d84a8;
         }
-        p{
-            margin:30px 10px;
-            font-size: 20px;
-        }
-        .container{
-            width:900px;
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0 8px;
-        }
-        @media (max-width: 800px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
 
-
-            nav ul {
-                justify-content: center;
-            }
-            .cta-btn{
-                margin-top:10px;
-            }
-
-            nav ul li {
-                margin: 5px 10px;
-            }
+        p a {
+            color: #3d84a8;
         }
-        @media (max-width: 480px) {
-            header {
-                padding: 10px;
-            }
 
-            .cta-btn {
-                padding: 6px 15px;
-                margin:10px;
-            }
+        p {
+            margin: 20px 10px;
+            font-size: 18px;
+            line-height: 1.6;
         }
+
         .footer {
             background-color: #f1f1f1;
             padding: 10px 20px;
@@ -121,63 +106,91 @@
             position: fixed;
             width: 100%;
             bottom: 0;
-            left: 0;
             color: #333;
             font-size: 12px;
         }
-        .footer p{
-            font-size:16px;
-            padding:0;
-            margin:10px;
+
+        .footer p {
+            font-size: 14px;
+            padding: 0;
+            margin: 10px;
+        }
+
+        @media (max-width: 800px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-direction: column;
+                padding: 0;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .img {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .cta-btn {
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-btn {
+                padding: 6px 15px;
+                margin: 10px;
+            }
+
+            .footer p {
+                font-size: 12px;
+            }
         }
     </style>
-    
 </head>
 <body>
-    <!-- <div class="selection-container">
-        <div class="card" onclick="chooseRole('mentee')">
-            <img src="/images/mentee.png" alt="Mentee Image">
-            <h2>Mentee</h2>
-        </div>
-        <div class="card" onclick="chooseRole('mentor')">
-            <img src="/images/mentor.png" alt="Mentor Image">
-            <h2>Mentor</h2>
-        </div>
-    </div> -->
     <header>
         <div class="logo">DRONA</div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Mentors</a></li>
                 <li><a href="#">Mentees</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <form action="/signup" >
-            <button class="cta-btn" >Sign Up</button>
+        <form action="/signup">
+            <button class="cta-btn">Sign Up</button>
         </form>
     </header>
+
     <div class="flex">
-    <div class="container">
-        <div class="content">
-            <p>We appreciate your interest in DRONA.<br>To Become a mentor kindly. <a href="#" onclick="chooseRole('mentee'); return false;">Sign Up</a></p>
-
-            <p>DRONA provides mentorship for mentees seeking guidance to build their career or to build their skills. Grab the chance of being the reason for someone's happiness.</p>
-
-            <p>Thank you for your interest in DRONA, seeking to get mentorship from industrial experts. <a href="#" onclick="chooseRole('mentee'); return false;">Sign Up</a></p>
-
-            <p>Our aim is to make a diverse platform where mentees can seek mentorship from industrial experts and subject matter experts for career guidance and skill enhancement.</p>
+        <div class="container">
+            <div class="content">
+                <p>We appreciate your interest in DRONA.<br>To Become a mentor kindly <a href="#" onclick="chooseRole('mentee'); return false;">Sign Up</a>.</p>
+                <p>DRONA provides mentorship for mentees seeking guidance to build their career or to build their skills. Grab the chance of being the reason for someone's happiness.</p>
+                <p>Thank you for your interest in DRONA, seeking to get mentorship from industrial experts. <a href="#" onclick="chooseRole('mentee'); return false;">Sign Up</a>.</p>
+                <p>Our aim is to make a diverse platform where mentees can seek mentorship from industrial experts and subject matter experts for career guidance and skill enhancement.</p>
+            </div>
         </div>
 
-        <div class="footer">
-            <p>All the information submitted will be kept confidential. By filling out and submitting this form, you agree to share the information of yourself to DRONA and will not be shared publicly.</p>
-            <p>&copy;DRONA</p>
+        <div class="img">
+            <img src="/images/secure.png" alt="secure">
         </div>
     </div>
-    <div class="img"><img src="/images/secure.png" alt="secure"></div>
-</div>
+
+    <div class="footer">
+        <p>All the information submitted will be kept confidential. By filling out and submitting this form, you agree to share the information of yourself to DRONA and will not be shared publicly.</p>
+        <p>&copy; DRONA</p>
+    </div>
+
     <script>
         function chooseRole(role) {
             localStorage.setItem('userRole', role); // Save role in local storage
@@ -186,3 +199,4 @@
     </script>
 </body>
 </html>
+

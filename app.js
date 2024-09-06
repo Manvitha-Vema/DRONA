@@ -12,6 +12,7 @@ const Mentor = require("./models/mentorModel");
 const Mentee = require("./models/menteeModel");
 const userOtpVerify = require("./models/userOtpVerify");
 const bodyParser = require("body-parser");
+const MongoStore = require("connect-mongo");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -30,8 +31,8 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("views", path.join(__dirname, "views"));
 
-// const Mongo =
-//   "mongodb+srv://manvithamanni13:hBkIw9pR7jmpfv9l@cluster0.zsw3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const Mongo =
+  "mongodb+srv://manvitha22mic7136:0vpUhARcv5WiyTii@cluster0.jih0d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 app.use(
   session({
@@ -53,7 +54,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URI, {});
+  await mongoose.connect(Mongo, {});
 }
 
 app.use(express.static("public"));

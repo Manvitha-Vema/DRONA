@@ -1,0 +1,83 @@
+/* Common styles for body */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Mentor/Mentee Selection Page */
+.selection-container {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin-top: 50px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 40%;
+    background-color: #f9f9f9;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card h2 {
+    margin: 10px 0;
+}
+
+/* Login and Signup Pages */
+.login-container, .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box, .signup-box {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.google-btn {
+    background-color: #3D84A8;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #3D84A8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}

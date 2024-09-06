@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .otp-container {
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2e6ba3;
+        }
+        p {
+            color: #777;
+        }
+        .otp-box {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+        .otp-box input {
+            width: 40px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #2e6ba3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button.cancel-btn {
+            background-color: #ccc;
+        }
+        button.submit-btn {
+            background-color: #2e6ba3;
+        }
+        a {
+            color: #2e6ba3;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <img src="/path/to/email-icon.png" alt="Email Icon" style="width: 100px; margin-bottom: 20px;">
+        <h1>Please check your mail</h1>
+        <p>We've sent a code to <strong>your_email@example.com</strong></p>
+        <div class="otp-box">
+            <input type="text" maxlength="1" class="otp-input" id="digit-1" autofocus>
+            <input type="text" maxlength="1" class="otp-input" id="digit-2">
+            <input type="text" maxlength="1" class="otp-input" id="digit-3">
+            <input type="text" maxlength="1" class="otp-input" id="digit-4">
+            <!-- <input type="text" maxlength="1" class="otp-input" id="digit-5" -->
+            <!-- <input type="text" maxlength="1" class="otp-input" id="digit-6"> -->
+        </div>
+        <p><a href="/auth/resend-otp">Didn't get the code? Resend</a></p>
+        <div>
+            <button class="cancel-btn" onclick="window.location.href='/signup'">Cancel</button>
+            <button class="submit-btn" id="submit-otp-btn">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('keyup', (e) => {
+                if (e.key === 'Backspace' && index > 0) {
+                    otpInputs[index - 1].focus();
+                } else if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+        });
+
+        document.getElementById('submit-otp-btn').addEventListener('click', async () => {
+            const otp = Array.from(otpInputs).map(input => input.value).join('');
+            if (otp.length !== 4) {
+                alert('Please enter a 4-digit OTP.');
+                return;
+            }
+
+            const response = await fetch('/verify-2fa', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ otp })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert('Account verified successfully!');
+                window.location.href = '/login'; // Redirect to login page
+            } else {
+                alert(data.message);
+            }
+        });
+    </script>
+</body>
+</html>

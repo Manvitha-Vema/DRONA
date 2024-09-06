@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Mentor/Mentee Selection</title>
+</head>
+<body>
+    <div class="selection-container">
+        <div class="card" onclick="chooseRole('mentee')">
+            <img src="/images/mentee.png" alt="Mentee Image">
+            <h2>Mentee</h2>
+        </div>
+        <div class="card" onclick="chooseRole('mentor')">
+            <img src="/images/mentor.png" alt="Mentor Image">
+            <h2>Mentor</h2>
+        </div>
+    </div>
+    <script>
+        function chooseRole(role) {
+            localStorage.setItem('userRole', role); // Save role in local storage
+            window.location.href = '/login'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

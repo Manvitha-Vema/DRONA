@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Create Account</title>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-box">
+            <h1>Create Account</h1>
+            <button class="google-btn" onclick="window.location.href='/auth/google'">Sign in with Google</button>
+            <form id="signup-form">
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="password" id="confirm-password" placeholder="Re-enter your password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <p>Already have an account? <a href="/login">Log in</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
+    
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const role = localStorage.getItem('userRole'); // Get role (mentor/mentee) from local storage
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, role })
+            });
+
+            const data = await response.json();
+            alert(data.message);
+        });
+    </script>
+</body>
+</html>

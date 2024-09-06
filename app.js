@@ -30,8 +30,8 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("views", path.join(__dirname, "views"));
 
-const Mongo =
-  "mongodb+srv://manvithamanni13:hBkIw9pR7jmpfv9l@cluster0.zsw3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const Mongo =
+//   "mongodb+srv://manvithamanni13:hBkIw9pR7jmpfv9l@cluster0.zsw3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 app.use(
   session({
@@ -53,7 +53,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(Mongo, {});
+  await mongoose.connect(process.env.MONGO_URI, {});
 }
 
 app.use(express.static("public"));
